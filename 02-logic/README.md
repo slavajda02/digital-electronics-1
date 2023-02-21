@@ -1,4 +1,4 @@
-# Lab 2: INSERT_YOUR_FIRSTNAME INSERT_YOUR_LASTNAME
+# Lab 2: Miloslav Kužela
 
 ### 2-bit comparator
 
@@ -16,7 +16,7 @@
 simplified SoP (Sum of the Products) form of the "greater than" function and simplified PoS (Product of 
 the Sums) form of the "less than" function.
 
-   ![Logic functions](images/comparator_min.png)
+   ![Logic functions](images/equations.png)
 
 ### 4-bit comparator
 
@@ -52,4 +52,4 @@ comments, and follow VHDL guidelines:
 
 2. Link to your public EDA Playground example:
 
-   [https://www.edaplayground.com/...](https://www.edaplayground.com/...)
+   [https://www.edaplayground.com/...](https://www.edaplayground.com/x/sqex)
