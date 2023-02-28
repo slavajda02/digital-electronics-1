@@ -10,10 +10,10 @@ begin
 
 with sel_i select --Multiplexer, selects input according to sel_i variable
 	f_o <= a_i when "00",
-    b_i when "01",
- 	c_i when "10",
-    d_i when "11",
-    '0' when others ;
+	b_i when "01",
+	c_i when "10",
+	d_i when "11",
+	'0' when others ;
 
 end architecture Behavioral;
 ```
