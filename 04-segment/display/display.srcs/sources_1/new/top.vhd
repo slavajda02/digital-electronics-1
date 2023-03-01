@@ -1,3 +1,54 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date: 03/01/2023 12:30:38 PM
+-- Design Name: 
+-- Module Name: top - Behavioral
+-- Project Name: 
+-- Target Devices: 
+-- Tool Versions: 
+-- Description: 
+-- 
+-- Dependencies: 
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+-- 
+----------------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx leaf cells in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity top is
+    Port ( SW : in STD_LOGIC_VECTOR (3 downto 0);
+           LED : out STD_LOGIC_VECTOR (7 downto 0);
+           CA : out STD_LOGIC;
+           CB : out STD_LOGIC;
+           CC : out STD_LOGIC;
+           CD : out STD_LOGIC;
+           CE : out STD_LOGIC;
+           CF : out STD_LOGIC;
+           CG : out STD_LOGIC;
+           AN : out STD_LOGIC_VECTOR (7 downto 0);
+           BTNC : in STD_LOGIC);
+end top;
+
+------------------------------------------------------------
+-- Architecture body for top level
+------------------------------------------------------------
+
 architecture behavioral of top is
 
 begin
@@ -29,15 +80,37 @@ begin
 -- Experiments on your own: LED(7:4) indicators
 
 -- Turn LED(4) on if input value is equal to 0, ie "0000"
--- LED(4) <= WRITE YOUR CODE HERE
+with SW select
+    LED(4) <= '1' when "0000",
+    '0' when others; 
 
 -- Turn LED(5) on if input value is greater than "1001", ie 10, 11, 12, ...
--- LED(5) <= WRITE YOUR CODE HERE
+with SW select
+    LED(5) <= '1' when "1010",
+    '1' when "1011",
+    '1' when "1100",
+    '1' when "1101",
+    '1' when "1110",
+    '1' when "1111",
+    '0' when others;
 
 -- Turn LED(6) on if input value is odd, ie 1, 3, 5, ...
--- LED(6) <= WRITE YOUR CODE HERE
+with SW select
+    LED(6) <= '1' when "0001",
+    '1' when "0011",
+    '1' when "0101",
+    '1' when "1000",
+    '1' when "1010",
+    '1' when "1100",
+    '1' when "1110",
+    '0' when others;
 
 -- Turn LED(7) on if input value is a power of two, ie 1, 2, 4, or 8
--- LED(7) <= WRITE YOUR CODE HERE
+with SW select
+    LED(7) <= '1' when "0001",
+    '1' when "0010",
+    '1' when "0100",
+    '1' when "1000",
+    '0' when others;
 
 end architecture behavioral;
