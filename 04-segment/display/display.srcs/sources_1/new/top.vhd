@@ -99,10 +99,11 @@ with SW select
     LED(6) <= '1' when "0001",
     '1' when "0011",
     '1' when "0101",
-    '1' when "1000",
-    '1' when "1010",
-    '1' when "1100",
-    '1' when "1110",
+    '1' when "0111",
+    '1' when "1001",
+    '1' when "1011",
+    '1' when "1101",
+    '1' when "1111",
     '0' when others;
 
 -- Turn LED(7) on if input value is a power of two, ie 1, 2, 4, or 8
