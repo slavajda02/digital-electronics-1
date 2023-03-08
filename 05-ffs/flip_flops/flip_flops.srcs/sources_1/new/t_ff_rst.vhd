@@ -56,11 +56,13 @@ begin
     begin
         if rising_edge(clk) then
 
-            if rst = '1' then --reset signal priority
+            if rst = '1' then --reset signal logic
                 sig_q <= '0';
             else
                 if t = '1' then --t input 
-                    sig_q <= not(sig_q); --inverts current output 
+                    sig_q <= not(sig_q); --inverts current output
+                else
+                    sig_q <= sig_q; 
                 end if;
             end if;
         end if;

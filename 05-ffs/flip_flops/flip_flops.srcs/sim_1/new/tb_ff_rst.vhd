@@ -40,6 +40,8 @@ architecture testbench of tb_ff_rst is
     signal sig_data       : std_logic;
     signal sig_dq         : std_logic;
     signal sig_dq_bar     : std_logic;
+    signal sig_tq       : std_logic;
+    signal sig_tq_bar   : std_logic;
 
 begin
     -- Connecting testbench signals with d_ff_rst entity
@@ -51,6 +53,15 @@ begin
             d     => sig_data,
             q     => sig_dq,
             q_bar => sig_dq_bar
+            );
+            
+    uut_t_ff_rst : entity work.t_ff_rst
+        port map (
+            clk   => sig_clk_100MHz,
+            rst   => sig_rst,
+            t     => sig_data,
+            q     => sig_tq,
+            q_bar => sig_tq_bar
             );
 
     --------------------------------------------------------
@@ -75,7 +86,7 @@ begin
         sig_rst <= '0';
 
         -- ACTIVATE AND DEACTIVATE RESET HERE
-        wait for 100 ns;
+        wait for 10 ns;
         sig_rst <= '1';
         wait for 100 ns;
         sig_rst <= '0';
