@@ -52,10 +52,15 @@ begin
     begin
         if rising_edge(clk) then  -- Synchronous process
 
-            -- USE HIGH-ACTIVE RESET HERE
-
+            if rst = '1' then
+                q <= '0';
+                q_bar <= '1';
+                
+            else
                 q     <= d;
                 q_bar <= not d;
+            end if;
+            
         end if;
     end process p_d_ff_rst;
 
