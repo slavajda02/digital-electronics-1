@@ -32,7 +32,6 @@ entity int_tlc is
   port (
     clk         : in    std_logic;                    --! Main clock
     rst         : in    std_logic;                    --! High-active synchronous reset
-    speed       : in    std_logic;                    --! Speed button for transitioning to WEST_GO
     south       : out   std_logic_vector(2 downto 0); --! Traffic light for "south" direction
     west        : out   std_logic_vector(2 downto 0); --! Traffic light for "west" direction
     counter     : out   std_logic_vector(4 downto 0);   --! For displaying the delay vector
@@ -108,34 +107,14 @@ begin
 
     if (rising_edge(clk)) then
       if (rst = '1') then                    -- Synchronous reset
-        sig_state <= WEST_STOP;              -- Init state
+        sig_state <= WEST_GO;                -- Init state
         sig_cnt   <= c_ZERO;                 -- Clear delay counter
       elsif (sig_en = '1') then
         -- Every 250 ms, CASE checks the value of sig_state
         -- local signal and changes to the next state 
         -- according to the delay value.
-        
-        -- Speed button forces to stop south if south is GREEN
-        if (speed = '1') then
-            if (sig_state = SOUTH_GO) then
-                sig_state <= SOUTH_WAIT;
-                sig_cnt <= c_ZERO; -- Resets the counter
-                -- Count to 1 secs
-            end if;
-        end if;
-        
+            
         case sig_state is
-
-          when WEST_STOP =>
-            -- Count to 2 secs
-            if (sig_cnt < c_DELAY_2SEC) then
-              sig_cnt <= sig_cnt + 1;
-            else
-              -- Move to the next state
-              sig_state <= WEST_GO;
-              -- Reset local counter value
-              sig_cnt <= c_ZERO;
-            end if;
 
           when WEST_GO =>
             -- Count to 4 secs
@@ -154,21 +133,11 @@ begin
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
-              sig_state <= SOUTH_STOP;
+              sig_state <= WEST_STOP;
               -- Reset local counter value
               sig_cnt <= c_ZERO;
             end if;
           
-          when SOUTH_STOP =>
-          -- Count to 2 secs
-            if (sig_cnt < c_DELAY_2SEC) then
-              sig_cnt <= sig_cnt + 1;
-            else
-              -- Move to the next state
-              sig_state <= SOUTH_GO;
-              -- Reset local counter value
-              sig_cnt <= c_ZERO;
-            end if;
          
           when SOUTH_GO =>
           -- Count to 4 secs
@@ -187,7 +156,7 @@ begin
               sig_cnt <= sig_cnt + 1;
             else
               -- Move to the next state
-              sig_state <= WEST_STOP;
+              sig_state <= SOUTH_STOP;
               -- Reset local counter value
               sig_cnt <= c_ZERO;
             end if;
