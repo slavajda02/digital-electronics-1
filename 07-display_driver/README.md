@@ -11,18 +11,16 @@
     -- selecting data for a single digit, a decimal point,
     -- and switches the common anodes of each display.
     --------------------------------------------------------
-     p_mux : process (clk) is
-	begin
+    p_mux : process (clk) is
+    begin
 
     if (rising_edge(clk)) then
-		if (rst = '1') then
-			sig_hex <= data0;
+    	if (rst = '1') then
+        	sig_hex <= data0;
 			dp      <= dp_vect(0);
 			dig     <= "1110";
 		else
-
 			case sig_cnt_2bit is
-
 				when "11" =>
 				sig_hex <= data3;
 				dp      <= dp_vect(3);
@@ -42,10 +40,10 @@
 				sig_hex <= data0;
 				dp      <= dp_vect(0);
 				dig     <= "1110";
-
-				end case;
-            end if;
+			end case;
+		end if
         end if;
+    end if;
     end process p_mux;
 ```
 
